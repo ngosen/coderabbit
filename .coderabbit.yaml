@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+#
+# Organization-wide CodeRabbit settings for ngosen. A repository that adds its
+# own .coderabbit.yaml must set `inheritance: true` to keep these.
+# Each repository's AGENTS.md / CLAUDE.md is read as review guidelines by default.
+
+language: en-US
+tone_instructions: >-
+  Terse maintainer. One or two plain sentences per comment, no praise, emoji
+  or headings. Raise bugs, AGENTS.md rule breaks and missing tests; skip what
+  clang-format, ruff or CI already catch.
+
+reviews:
+  profile: chill
+  request_changes_workflow: false
+
+  # The walkthrough stays; the extras around it are noise on small PRs.
+  high_level_summary: true
+  collapse_walkthrough: true
+  changed_files_summary: false
+  sequence_diagrams: false
+  estimate_code_review_effort: false
+  related_prs: false
+  suggested_labels: false
+  suggested_reviewers: false
+  in_progress_fortune: false
+  poem: false
+
+  auto_review:
+    enabled: true
+    drafts: false
+    # Work lands in next/patch (or feature branches in forks), not the default branch.
+    base_branches:
+      - ".*"
+
+  path_filters:
+    - "!**/*.po"
+    - "!**/*.pot"
+    - "!**/package-lock.json"
+    - "!**/Cargo.lock"
+    - "!public/telex/telex.wasm"
+    - "!**/proptest-regressions/**"
+
+  pre_merge_checks:
+    title:
+      mode: warning
+      requirements: >-
+        Conventional Commits (type(scope): subject), imperative mood, at most
+        72 characters.
+    # A generic "good description" check pushes towards long PR text, which
+    # these repositories avoid.
+    description:
+      mode: "off"
+    issue_assessment:
+      mode: "off"
+
+  finishing_touches:
+    docstrings:
+      enabled: false
+    unit_tests:
+      enabled: false
+
+  tools:
+    # Vietnamese changelogs and pages are not English prose.
+    languagetool:
+      enabled: false
+    markdownlint:
+      enabled: false
+
+chat:
+  art: false
