@@ -32,6 +32,9 @@ reviews:
     # Work lands in next/patch (or feature branches in forks), not the default branch.
     base_branches:
       - ".*"
+    # Maintainer PRs are reviewed on request (@coderabbitai review); outside ones always.
+    ignore_usernames:
+      - nguyenphivn
 
   path_filters:
     - "!**/*.po"
